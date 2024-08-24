@@ -50,15 +50,21 @@ plt.xlabel('Log- Transformed data')
 
 
 REGULAR DIFFERENCING:
+
+
 <img width="498" alt="image" src="https://github.com/user-attachments/assets/296f8873-2b7f-4e46-af1b-944a078b02ef">
 
 
 SEASONAL ADJUSTMENT:
+
+
 <img width="498" alt="image" src="https://github.com/user-attachments/assets/463b29a6-f302-4c15-9c8e-bc6481c87886">
 
 
 
 LOG TRANSFORMATION:
+
+
 <img width="494" alt="image" src="https://github.com/user-attachments/assets/d557649e-c274-47c2-b90e-f6b435769668">
 
 
