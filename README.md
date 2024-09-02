@@ -10,62 +10,59 @@ To perform regular differncing,seasonal adjustment and log transformatio on elec
 4. Plot the data according to need, before and after regular differncing,seasonal adjustment,log transformation.
 5. Display the overall results.
 ### PROGRAM:
-import numpy as np
-import matplotlib.pyplot as plt
+~~~
 import pandas as pd
-data=pd.read_csv("/content/electricityproduction.csv",parse_dates=['Month'],index_col='Month')
-data.head()
-data['shifted_value']=passengers['#production'].shift(1)
-data['difference_value']=passengers['#production']-passengers['shifted_value']
-data.dropna(inplace=True)
-print(passengers)
-passengers.plot(kind='line')
+df = pd.read_csv('Electric_Production.csv')
+print(df.head())
 
+# Apply log transformation
+df['Log_Production'] = np.log(df['IPG2211A2N'])
+print(df.head())
+df['Diff_Production'] = df['IPG2211A2N'].diff()
+print(df.head())
+df['DATE'] = pd.to_datetime(df['DATE']) # Parse the 'DATE' column as datetime objects
+df.set_index('DATE', inplace=True) # Set the 'DATE' column as the index
 
-data=pd.DataFrame(data)
-result=seasonal_decompose(passengers['#production'],model='additive',period=1)
-seasonal=result.seasonal
-data['Seasonal_value']=passengers['#production']-seasonal
-data.dropna(inplace=True)
-print(data)
-data.plot(kind='line')
+# Seasonal decomposition, explicitly setting the period
+decomposition = sm.tsa.seasonal_decompose(df['IPG2211A2N'].dropna(), model='additive', period=12) # Assuming monthly data, set period to 12
+df['Seasonal_Component'] = decomposition.seasonal
+print(df.head())
 
-
-
-data.dropna(inplace=True)
-x=data.index # Use .index to access the dates
-y=data['#production']
-data_log=np.log(data['#production'])
-X=data.index # Use .index to access the dates
-Y=data_log
-import matplotlib.pyplot as plt
-plt.plot(x,y)
-plt.xlabel('Original Data')
-plt.plot(X,Y)
-plt.xlabel('Log- Transformed data')
-
-
-
+# Plot the components
+plt.figure(figsize=(12, 8))
+plt.subplot(3, 1, 1)
+plt.plot(df['IPG2211A2N'], label='Original Series')
+plt.legend()
+plt.subplot(3, 1, 2)
+plt.plot(df['Seasonal_Component'], label='Seasonal Component', color='orange')
+plt.legend()
+plt.subplot(3, 1, 3)
+plt.plot(df['IPG2211A2N'] - df['Seasonal_Component'], label='Deseasonalized Series', color='green')
+plt.legend()
+plt.tight_layout()
+plt.show()
+~~~
 ### OUTPUT:
 
 
 REGULAR DIFFERENCING:
+<img width="646" alt="image" src="https://github.com/user-attachments/assets/d21db9ce-e649-4005-90ae-5053dcf0af40">
 
 
-<img width="498" alt="image" src="https://ithub.com/user-attachments/assets/296f8873-2b7f-4e46-af1b-944a078b02ef">
 
 
 SEASONAL ADJUSTMENT:
 
 
-<img width="498" alt="image" src="https://ithub.com/user-attachments/assets/463b29a6-f302-4c15-9c8e-bc6481c87886">
+<img width="646" alt="image" src="https://github.com/user-attachments/assets/f2475f50-ffc6-4416-a8db-722a8d85b345">
+
 
 
 
 LOG TRANSFORMATION:
 
 
-<img width="494" alt="image" src="https://github.com/user-attachments/assets/d557649e-c274-47c2-b90e-f6b435769668">
+<img width="624" alt="image" src="https://github.com/user-attachments/assets/81d88f6f-aef9-4e32-821e-3650f3bf9f48">
 
 
 
