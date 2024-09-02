@@ -13,30 +13,30 @@ To perform regular differncing,seasonal adjustment and log transformatio on elec
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-passengers=pd.read_csv("/content/AirPassengers .csv",parse_dates=['Month'],index_col='Month')
-passengers.head()
-passengers['shifted_value']=passengers['#Passengers'].shift(1)
-passengers['difference_value']=passengers['#Passengers']-passengers['shifted_value']
-passengers.dropna(inplace=True)
+data=pd.read_csv("/content/electricityproduction.csv",parse_dates=['Month'],index_col='Month')
+data.head()
+data['shifted_value']=passengers['#production'].shift(1)
+data['difference_value']=passengers['#production']-passengers['shifted_value']
+data.dropna(inplace=True)
 print(passengers)
 passengers.plot(kind='line')
 
 
-passengers=pd.DataFrame(data)
-result=seasonal_decompose(passengers['#Passengers'],model='additive',period=1)
+data=pd.DataFrame(data)
+result=seasonal_decompose(passengers['#production'],model='additive',period=1)
 seasonal=result.seasonal
-passengers['Seasonal_value']=passengers['#Passengers']-seasonal
-passengers.dropna(inplace=True)
-print(passengers)
-passengers.plot(kind='line')
+data['Seasonal_value']=passengers['#production']-seasonal
+data.dropna(inplace=True)
+print(data)
+data.plot(kind='line')
 
 
 
-passengers.dropna(inplace=True)
-x=passengers.index # Use .index to access the dates
-y=passengers['#Passengers']
-data_log=np.log(data['#Passengers'])
-X=passengers.index # Use .index to access the dates
+data.dropna(inplace=True)
+x=data.index # Use .index to access the dates
+y=data['#production']
+data_log=np.log(data['#production'])
+X=data.index # Use .index to access the dates
 Y=data_log
 import matplotlib.pyplot as plt
 plt.plot(x,y)
