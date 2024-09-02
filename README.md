@@ -2,7 +2,7 @@
 # Date: 
 
 ### AIM:
-To perform regular differncing,seasonal adjustment and log transformatio on international airline passenger data
+To perform regular differncing,seasonal adjustment and log transformatio on electricity production data.
 ### ALGORITHM:
 1. Import the required packages like pandas and numpy
 2. Read the data using the pandas
@@ -71,5 +71,5 @@ LOG TRANSFORMATION:
 
 
 ### RESULT:
-Thus we have created the python code for the conversion of non stationary to stationary data on international airline passenger
+Thus wthe python code for the conversion of non stationary to stationary data on electricity production
 data.
