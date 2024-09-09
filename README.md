@@ -1,5 +1,11 @@
+Developed by: Koduru Sanath Kumar Reddy
+
+Register no: 212221240024
+
+Date: 
+ 
 # Ex.No: 1B                     CONVERSION OF NON STATIONARY TO STATIONARY DATA
-# Date: 
+
 
 ### AIM:
 To perform regular differncing,seasonal adjustment and log transformatio on electricity production data.
